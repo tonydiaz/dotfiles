@@ -1,0 +1,19 @@
+[core]
+        excludesfile = /Users/tonydiaz/.gitignore_global
+[user]
+        name = Tony Diaz
+        email = <email address>
+[filter "lfs"]
+        clean = git-lfs clean %f
+        smudge = git-lfs smudge %f
+        required = true
+[alias]
+        co = checkout
+        br = branch
+        st = status
+        sync = !git checkout master && git pull --ff-only upstream master && git push origin master
+        cpr = "!f() { git fetch upstream refs/pull/$1/head && git checkout FETCH_HEAD; }; f"
+        lol = log --oneline --graph --decorate --all
+        force = "!git push -f origin \"$(git rev-parse --abbrev-ref HEAD)\""
+        pr = "!open \"$(git remote -v | grep origin | grep push | cut -f 2 | cut -d \" \" -f 1 | sed -e \"s|git@\\(.*\\):\\(.*\\).git|https://\\1/\\2|\")/pull/new/$(git rev-parse --abbrev-ref HEAD)\""
+        gh = "!open \"$(git remote -v | grep origin | grep push | cut -f 2 | cut -d \" \" -f 1 | sed -e \"s|git@\\(.*\\):\\(.*\\).git|https://\\1/\\2|\")/tree/$(git rev-parse --abbrev-ref HEAD)\""
